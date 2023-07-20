@@ -467,6 +467,10 @@ type AttendeeBarcodes struct {
 	Created DateTime `json:"created"`
 	// When the attendee barcode was changed
 	Changed DateTime `json:"changed"`
+	// Checkin Type
+	CheckinType int `json:"checkin_type"`
+	// Is Printed
+	IsPrinted bool `json:"is_printed"`
 }
 
 // Represents team information for the attendee if the event has teams configured
