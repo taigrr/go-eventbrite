@@ -95,11 +95,12 @@ type Timezone struct {
 //
 // see @https://www.eventbrite.com/developer/v3/api_overview/pagination/#ebapi-paginated-responses
 type Pagination struct {
-	ObjectCount  int  `json:"object_count"`
-	PageNumber   int  `json:"page_number"`
-	PageSize     int  `json:"page_size"`
-	PageCount    int  `json:"page_count"`
-	HasMoreItems bool `json:"has_more_items"`
+	ObjectCount  int    `json:"object_count"`
+	PageNumber   int    `json:"page_number"`
+	PageSize     int    `json:"page_size"`
+	PageCount    int    `json:"page_count"`
+	HasMoreItems bool   `json:"has_more_items"`
+	Continuation string `json:"continuation"`
 }
 
 // Returned for fields which represent HTML, like event names and descriptions.
