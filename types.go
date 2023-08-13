@@ -344,6 +344,7 @@ type Webhook struct {
 // Attendee is an object representing the details of one or more people coming to the event
 // Attendee objects are considered private and are only available to the event owner
 type Attendee struct {
+	ID string `json:"id"`
 	// When the attendee was created (order placed)
 	Created DateTime `json:"created"`
 	// When the attendee was last changed
