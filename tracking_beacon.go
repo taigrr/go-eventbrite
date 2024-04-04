@@ -103,17 +103,17 @@ func (c *Client) TrackingBeaconDelete(ctx context.Context, id string) (*Tracking
 // TrackingBeaconGetForEvent returns the list of tracking_beacon for the event :event_id
 //
 // https://www.eventbrite.com/developer/v3/endpoints/tracking_beacons/#ebapi-get-events-event-id-tracking-beacons
-func (c *Client) TrackingBeaconGetForEvent(ctx context.Context, eventId string, req *GetTrackingBeaconForEventRequest) (*TrackingBeacon, error) {
+func (c *Client) TrackingBeaconGetForEvent(ctx context.Context, eventID string, req *GetTrackingBeaconForEventRequest) (*TrackingBeacon, error) {
 	res := new(TrackingBeacon)
 
-	return res, c.getJSON(ctx, fmt.Sprintf("/events/%s/tracking_beacons/", eventId), req, res)
+	return res, c.getJSON(ctx, fmt.Sprintf("/events/%s/tracking_beacons/", eventID), req, res)
 }
 
 // TrackingBeaconGetForUser returns the list of tracking_beacon for the user :user_id
 //
 // https://www.eventbrite.com/developer/v3/endpoints/tracking_beacons/#ebapi-get-users-user-id-tracking-beacons
-func (c *Client) TrackingBeaconGetForUser(ctx context.Context, userId string, req *GetTrackingBeaconForUserRequest) (*TrackingBeacon, error) {
+func (c *Client) TrackingBeaconGetForUser(ctx context.Context, userID string, req *GetTrackingBeaconForUserRequest) (*TrackingBeacon, error) {
 	res := new(TrackingBeacon)
 
-	return res, c.getJSON(ctx, fmt.Sprintf("/events/%s/tracking_beacons/", userId), req, res)
+	return res, c.getJSON(ctx, fmt.Sprintf("/events/%s/tracking_beacons/", userID), req, res)
 }

@@ -161,7 +161,6 @@ func (c *Client) delete(ctx context.Context, path string) (*http.Response, error
 }
 
 func (c *Client) post(ctx context.Context, path string, apiReq interface{}) (*http.Response, error) {
-
 	if apiReq != nil {
 		if err := validate.Struct(apiReq); err != nil {
 			return nil, err
@@ -195,7 +194,7 @@ func (c *Client) post(ctx context.Context, path string, apiReq interface{}) (*ht
 	return ctxhttp.Do(ctx, c.httpClient, req)
 }
 
-func (c *Client) generateAuthQuery(path string, q url.Values) (string, error) {
+func (c *Client) generateAuthQuery(_ string, q url.Values) (string, error) {
 	if c.token != "" {
 		q.Set("token", c.token)
 		q.Set("expand", "venue,category,subcategories")
@@ -241,14 +240,13 @@ func (c *Client) deleteJSON(ctx context.Context, path string, resp interface{}) 
 }
 
 func toValues(i interface{}) (values url.Values) {
-
 	if i == nil {
 		return url.Values{}
 	}
 
-	switch i.(type) {
+	switch i := i.(type) {
 	case url.Values:
-		return i.(url.Values)
+		return i
 	}
 
 	values = url.Values{}

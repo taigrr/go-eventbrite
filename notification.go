@@ -21,14 +21,14 @@ type Notification struct {
 	// It is the call to action title associated to the notification
 	Cta string `json:"cta"`
 	// It is a link or a deep link associated to the notification
-	Url string `json:"url"`
+	URL string `json:"url"`
 	// It is the date when the notification was created
 	Created Date `json:"created"`
 	// It is the channel (group) of the notification. The available channel ids
 	// are: ticket_reminders, my_events, social, discovery and eventbrite
-	ChannelId string `json:"channel_id"`
+	ChannelID string `json:"channel_id"`
 	// The image logo for the event (optional)
-	ImageId Image `json:"image_id"`
+	ImageID Image `json:"image_id"`
 }
 
 // Notifications gets a paginated response of notification objects for a determined user.

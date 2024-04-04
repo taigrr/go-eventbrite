@@ -39,7 +39,7 @@ type UpdateOrganizerRequest struct {
 	// The long description of the organizer
 	LongDescription string `json:"organizer.long_description.html"`
 	// The logo id of the organizer
-	LogoId string `json:"organizer.logo.id"`
+	LogoID string `json:"organizer.logo.id"`
 	// The website for the organizer
 	Website string `json:"organizer.website"`
 	// The Twitter handle for the organizer

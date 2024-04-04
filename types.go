@@ -46,7 +46,7 @@ type Date struct {
 }
 
 func (d *Date) UnmarshalJSON(data []byte) error {
-	data = bytes.Replace(data, []byte("\""), []byte(""), -1)
+	data = bytes.ReplaceAll(data, []byte("\""), []byte(""))
 	t, err := time.Parse("2006-01-02", string(data))
 	if err != nil {
 		fmt.Println(err)
@@ -65,7 +65,7 @@ type DateTime struct {
 }
 
 func (d *DateTime) UnmarshalJSON(data []byte) error {
-	data = bytes.Replace(data, []byte("\""), []byte(""), -1)
+	data = bytes.ReplaceAll(data, []byte("\""), []byte(""))
 	t, err := time.Parse("2006-01-02T15:04:05Z", string(data))
 	if err != nil {
 		fmt.Println(err)
@@ -111,7 +111,7 @@ type Pagination struct {
 // https://www.eventbrite.com/developer/v3/response_formats/basic/#ebapi-multipart-text
 type MultipartText struct {
 	Text string `json:"text"`
-	Html string `json:"html"`
+	HTML string `json:"html"`
 }
 
 // A combination of a timezone from the Olson specification as a string, and two datetime values, one for
@@ -153,7 +153,7 @@ type Image struct {
 	// The image’s ID
 	ID string `json:"id"`
 	// The URL of the image
-	Url string `json:"url"`
+	URL string `json:"url"`
 }
 
 // A location where an event happens.
@@ -205,7 +205,7 @@ type Organizer struct {
 	// The description of the organizer (may be very long and contain significant formatting)
 	Description MultipartText `json:"description"`
 	// The URL to the organizer’s page on Eventbrite
-	Url string `json:"url"`
+	URL string `json:"url"`
 }
 
 // An overarching category that an event falls into (vertical). Examples are “Music”, and “Endurance”.
@@ -336,7 +336,7 @@ type TrackingBeacon struct {
 // An object representing a single webhook associated with the account
 type Webhook struct {
 	// The url that the webhook will send data to when it is triggered
-	EndpointUrl string `json:"endpoint_url"`
+	EndpointURL string `json:"endpoint_url"`
 	// One or any combination of actions that will cause this webhook to fire
 	Actions string `json:"actions"`
 }

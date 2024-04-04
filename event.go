@@ -13,14 +13,14 @@ import (
 // https://www.eventbrite.com/developer/v3/response_formats/event/#ebapi-event
 type Event struct {
 	// Event ID
-	Id string `json:"id"`
+	ID string `json:"id"`
 	// The event’s name
 	Name MultipartText `json:"name"`
 	// multipart-text: The event’s description (contents of the event page).
 	// May be long and have significant formatting. (optional)
 	Description MultipartText `json:"description"`
 	// The URL to the event page for this event on Eventbrite
-	Url string `json:"url"`
+	URL string `json:"url"`
 	// The start time of the event
 	Start DatetimeTz `json:"start"`
 	// The end time of the event
@@ -37,19 +37,19 @@ type Event struct {
 	OnlineEvent bool `json:"online_event"`
 	// The venue the event is held at (optional)
 	Venue   Venue  `json:"venue"`
-	VenueId string `json:"venue_id"`
+	VenueID string `json:"venue_id"`
 	// The organizer of the event
 	Organizer   Organizer `json:"organizer"`
-	OrganizerId string    `json:"organizer_id"`
+	OrganizerID string    `json:"organizer_id"`
 	// The event’s format (type of event: conference, seminar, concert, etc.) (optional)
 	Format   Format `json:"format"`
-	FormatId string `json:"format_id"`
+	FormatID string `json:"format_id"`
 	// The event’s category (technology, music, science, etc.) (optional)
 	Category   Category `json:"category"`
-	CategoryId string   `json:"category_id"`
+	CategoryID string   `json:"category_id"`
 	// The event’s subcategory (optional)
 	SubCategory   SubCategory `json:"subcategory"`
-	SubCategoryId string      `json:"subcategory_id"`
+	SubCategoryID string      `json:"subcategory_id"`
 	LogoID        string      `json:"logo_id"`
 	// The image logo for this event (optional)
 	Logo Image `json:"logo"`
@@ -86,9 +86,9 @@ type EventSearchRequest struct {
 	// The longitude of the southwest corner of a viewport.
 	LocationViewportSouthwestLongitude string `json:"location.viewport.southwest.longitude"`
 	// Only return events organized by the given Organizer ID.
-	OrganizerId string `json:"organizer.id"`
+	OrganizerID string `json:"organizer.id"`
 	// Only return events owned by the given User ID.
-	UserId string `json:"user.id"`
+	UserID string `json:"user.id"`
 	// Append the given tracking_code to the event URLs returned.
 	TrackingCode string `json:"tracking_code"`
 	// Only return events under the given category IDs. This should be a comma delimited string of category IDs.
@@ -132,9 +132,9 @@ type EventSearchRequest struct {
 // https://www.eventbrite.com/developer/v3/endpoints/events/#ebapi-id1
 type EventCreateRequest struct {
 	// The name of the event. Value cannot be empty nor whitespace.
-	NameHtml string `json:"event.name.html" validate:"required"`
+	NameHTML string `json:"event.name.html" validate:"required"`
 	// The ID of the organizer of this event
-	DescriptionHtml string `json:"event.description.html"`
+	DescriptionHTML string `json:"event.description.html"`
 	// The ID of the organizer of this event
 	OrganizerID string `json:"event.organizer_id"`
 	// The start time of the event
@@ -153,7 +153,7 @@ type EventCreateRequest struct {
 	Currency string `json:"event.currency" validate:"required"`
 	// The ID of a previously-created venue to associate with this event. You can omit this field or
 	// set it to null if you set online_event.
-	VenueId string `json:"event.venue_id"`
+	VenueID string `json:"event.venue_id"`
 	// Is the event online-only (no venue)?
 	OnlineEvent bool `json:"event.online_event"`
 	// If the event is publicly listed and searchable. Defaults to True.
@@ -187,13 +187,13 @@ type EventCreateRequest struct {
 // https://www.eventbrite.com/developer/v3/endpoints/events/#ebapi-id5
 type EventUpdateRequest struct {
 	// The name of the event. Value cannot be empty nor whitespace.
-	NameHtml string `json:"event.name.html"`
+	NameHTML string `json:"event.name.html"`
 	// The ID of the organizer of this event
-	DescriptionHtml string `json:"event.description.html" validate:"required"`
+	DescriptionHTML string `json:"event.description.html" validate:"required"`
 	// The ID of the organizer of this event
-	OrganizerId string `json:"event.organizer_id" validate:"required"`
+	OrganizerID string `json:"event.organizer_id" validate:"required"`
 	// The start time of the event
-	StartUtc string `json:"event.start.utc" validate:"required"`
+	StartUTC string `json:"event.start.utc" validate:"required"`
 	// Start time timezone (Olson format)
 	StartTimezone string `json:"event.start.timezone" validate:"required"`
 	// The end time of the event
@@ -389,7 +389,7 @@ type EventGetCannedQuestions struct {
 // https://www.eventbrite.com/developer/v3/endpoints/events/#ebapi-id33
 type EventCreateCannedQuestion struct {
 	// Question displayed to the recipient
-	Html string `json:"question.question.html"`
+	HTML string `json:"question.question.html"`
 	// Is an answer to this question required for registration?
 	Required bool `json:"question.required"`
 	// Type of Question (Valid choices are: checkbox, dropdown, text, paragraph, radio, or waiver)
@@ -424,7 +424,7 @@ type EventGetQuestions struct {
 // https://www.eventbrite.com/developer/v3/endpoints/events/#ebapi-id37
 type EventCreateQuestion struct {
 	// Question displayed to the recipient
-	Html string `json:"question.question.html"`
+	HTML string `json:"question.question.html"`
 	// Is an answer to this question required for registration?
 	Required bool `json:"question.required"`
 	// Type of Question (Valid choices are: checkbox, dropdown, text, paragraph, radio, or waiver)
@@ -473,7 +473,7 @@ type EventGetOrders struct {
 	// Only include orders placed by one of these emails
 	OnlyEmails []interface{} `json:"only_emails"`
 	// Don’t include orders placed by any of these emails
-	ExcludeEmails []interface{} `json:"only_emails"`
+	ExcludeEmails []interface{} `json:"exclude_emails"`
 	// Return only orders with selected refund requests statuses.
 	// Possible values are: completed, pending, outside_policy, disputed, denied
 	RefundRequestStatuses []interface{} `json:"refund_request_statuses"`
@@ -647,28 +647,28 @@ func (c *Client) EventCreateTicketClass(ctx context.Context, id string, class *E
 // EventGetTicketClass gets and returns a single TicketClass by ID
 //
 // https://www.eventbrite.com/developer/v3/endpoints/events/#ebapi-get-events-id-ticket-classes-ticket-class-id
-func (c *Client) EventGetTicketClass(ctx context.Context, eventId, ticketId string) (*TicketClass, error) {
+func (c *Client) EventGetTicketClass(ctx context.Context, eventID, ticketID string) (*TicketClass, error) {
 	result := new(TicketClass)
 
-	return result, c.getJSON(ctx, fmt.Sprintf("/events/%s/ticket_classes/%s/", eventId, ticketId), nil, result)
+	return result, c.getJSON(ctx, fmt.Sprintf("/events/%s/ticket_classes/%s/", eventID, ticketID), nil, result)
 }
 
 // EventUpdateTicketClass updates an existing ticket class, returning the updated result as a ticket_class under the key
 //
 // https://www.eventbrite.com/developer/v3/endpoints/events/#ebapi-post-events-id-ticket-classes-ticket-class-id
-func (c *Client) EventUpdateTicketClass(ctx context.Context, eventId, ticketId string, class *EventUpdateTicketClass) (*TicketClass, error) {
+func (c *Client) EventUpdateTicketClass(ctx context.Context, eventID, ticketID string, class *EventUpdateTicketClass) (*TicketClass, error) {
 	result := new(TicketClass)
 
-	return result, c.postJSON(ctx, fmt.Sprintf("/events/%s/ticket_classes/%s/", eventId, ticketId), nil, result)
+	return result, c.postJSON(ctx, fmt.Sprintf("/events/%s/ticket_classes/%s/", eventID, ticketID), nil, result)
 }
 
 // EventDeleteTicketClass deletes the ticket class. Returns {"deleted": true}
 //
 // https://www.eventbrite.com/developer/v3/endpoints/events/#ebapi-delete-events-id-ticket-classes-ticket-class-id
-func (c *Client) EventDeleteTicketClass(ctx context.Context, eventId, ticketId string, class *EventDeleteTicketClass) (interface{}, error) {
+func (c *Client) EventDeleteTicketClass(ctx context.Context, eventID, ticketID string, class *EventDeleteTicketClass) (interface{}, error) {
 	result := new(TicketClass)
 
-	return result, c.deleteJSON(ctx, fmt.Sprintf("/events/%s/ticket_classes/%s/", eventId, ticketId), result)
+	return result, c.deleteJSON(ctx, fmt.Sprintf("/events/%s/ticket_classes/%s/", eventID, ticketID), result)
 }
 
 // EventGetCannedQuestions this endpoint returns canned questions of a single event
@@ -713,8 +713,8 @@ func (c *Client) EventCreateQuestion(ctx context.Context, id string, q *EventCre
 // EventGetQuestion returns question for a specific question id
 //
 // https://www.eventbrite.com/developer/v3/endpoints/events/#ebapi-get-events-id-questions-id
-func (c *Client) EventGetQuestion(ctx context.Context, eventId, questionId string) (interface{}, error) {
+func (c *Client) EventGetQuestion(ctx context.Context, eventID, questionID string) (interface{}, error) {
 	var result interface{}
 
-	return result, c.postJSON(ctx, fmt.Sprintf("/events/%s/questions/%s/", eventId, questionId), nil, result)
+	return result, c.postJSON(ctx, fmt.Sprintf("/events/%s/questions/%s/", eventID, questionID), nil, result)
 }

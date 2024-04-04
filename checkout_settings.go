@@ -11,7 +11,6 @@ import (
 //
 // https://www.eventbrite.co.uk/developer/v3/endpoints/checkout_settings/#ebapi-get-checkout-settings-countries-currencies
 type Checkout struct {
-
 	// a list of supported ISO 3166-1 2-letter countries
 	Countries []string `json:"countries"`
 
@@ -19,7 +18,7 @@ type Checkout struct {
 	Currencies []string `json:"currencies"`
 
 	// a map of ISO 3166-1 alpha-2 country codes to their default ISO 4217 3-letter currency code
-	DefaultCurrenciesByCountry map[string]string `json:"currencies"`
+	DefaultCurrenciesByCountry map[string]string `json:"default_currencies_by_country"`
 }
 
 // CheckoutMethodsResponse is the response structure for the
@@ -27,7 +26,6 @@ type Checkout struct {
 //
 // https://www.eventbrite.co.uk/developer/v3/endpoints/checkout_settings/#ebapi-get-checkout-settings-methods
 type CheckoutMethodsResponse struct {
-
 	// a list with supported checkout methods given a country and currency combination.
 	// Set of possible values: [authnet, eventbrite, offline, paypal]
 	Methods []string `json:"methods"`
@@ -45,7 +43,6 @@ type CheckoutSettingsForAccount struct {
 //
 // https://www.eventbrite.co.uk/developer/v3/endpoints/checkout_settings/#ebapi-id1
 type CheckoutMethodsRequest struct {
-
 	// Expected methods for Country
 	Country string `json:"country" validate:"required"`
 
@@ -74,7 +71,6 @@ type CheckoutForAccountRequest struct {
 //
 // https://www.eventbrite.co.uk/developer/v3/endpoints/checkout_settings/#ebapi-id5
 type CheckoutCreateRequest struct {
-
 	// The country code for the checkout settings object
 	CountryCode string `json:"checkout_settings.country_code" validate:"required"`
 
@@ -116,7 +112,6 @@ type CheckoutCreateRequest struct {
 //
 // https://www.eventbrite.co.uk/developer/v3/endpoints/checkout_settings/#ebapi-id12
 type CheckoutAssociateToEventRequest struct {
-
 	// A list of IDs for checkout settings that should be linked to the event. In the format: 1234,5678,9012
 	CheckoutSettingsIds []string `json:"checkout_settings_ids"`
 }
@@ -127,7 +122,6 @@ type CheckoutAssociateToEventRequest struct {
 //
 // https://www.eventbrite.co.uk/developer/v3/endpoints/checkout_settings/#ebapi-id17
 type CheckoutAssociatePayoutToEvent struct {
-
 	// The vault ID for the user instrument to which payouts are sent
 	UserInstrumentVaultID string `json:"payout_settings.user_instrument_vault_id"`
 }
@@ -188,10 +182,10 @@ func (c *Client) CheckoutGet(ctx context.Context, id string) (*Checkout, error) 
 // CheckoutByEvent gets and returns a list of checkout_settings associated with a given event by its event_id
 //
 // https://www.eventbrite.co.uk/developer/v3/endpoints/checkout_settings/#ebapi-get-events-event-id-checkout-settings
-func (c *Client) CheckoutByEvent(ctx context.Context, eventId string) ([]*Checkout, error) {
+func (c *Client) CheckoutByEvent(ctx context.Context, eventID string) ([]*Checkout, error) {
 	var s []*Checkout
 
-	return s, c.getJSON(ctx, fmt.Sprintf("/events/%s/checkout_settings/", eventId), nil, s)
+	return s, c.getJSON(ctx, fmt.Sprintf("/events/%s/checkout_settings/", eventID), nil, s)
 }
 
 // CheckoutAssociate associates a single or set of checkout_settings with a given event by its event_id. This does not add
@@ -212,9 +206,9 @@ func (c *Client) CheckoutAssociate(ctx context.Context, eventID string, req *Che
 func (c *Client) CheckoutAssociatePayoutSettings(
 	ctx context.Context,
 	eventID string,
-	req *CheckoutAssociatePayoutToEvent) (interface{}, error) {
+	req *CheckoutAssociatePayoutToEvent,
+) (interface{}, error) {
 	var v interface{}
 
 	return v, c.postJSON(ctx, fmt.Sprintf("/events/%s/checkout_settings/", eventID), req, v)
-
 }

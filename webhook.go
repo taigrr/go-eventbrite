@@ -20,7 +20,7 @@ type WebhooksResult struct {
 // https://www.eventbrite.com/developer/v3/endpoints/webhooks/#ebapi-id5
 type CreateWebhookRequest struct {
 	// The target URL of the Webhook subscription
-	EndpointUrl string `json:"endpoint_url"`
+	EndpointURL string `json:"endpoint_url"`
 	// Determines what actions will trigger the webhook. If no value is sent for this param, it selects
 	// order.placed, event.published, and event.unpublished by default. See below for a more complete
 	// description of all available actions
@@ -55,7 +55,7 @@ func (c *Client) WebhookDelete(ctx context.Context, id string) (*Webhook, error)
 func (c *Client) Webhooks(ctx context.Context, req *WebhooksRequest) (*WebhooksResult, error) {
 	res := new(WebhooksResult)
 
-	return res, c.getJSON(ctx, fmt.Sprintf("/webhooks/"), req, res)
+	return res, c.getJSON(ctx, "/webhooks/", req, res)
 }
 
 // Creates a webhook for the authenticated user

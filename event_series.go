@@ -2,6 +2,7 @@ package eventbrite
 
 import (
 	"fmt"
+
 	"golang.org/x/net/context"
 )
 
@@ -104,7 +105,7 @@ type SeriesCUREventRequest struct {
 	//   "5678": { ... },
 	//   ...
 	// }
-	UpdateChildren interface{} `json:"create_children"`
+	UpdateChildren interface{} `json:"update_children"`
 	// A list of IDs for child events that should be deleted. In the format: 1234,5678,9012
 	DeleteChildren []string `json:"delete_children"`
 }
@@ -112,7 +113,7 @@ type SeriesCUREventRequest struct {
 // EventSeriesCreate creates a new repeating event series. The POST data must include information for at
 // least one event date in the series.
 //
-// Return object is not documented
+// # Return object is not documented
 //
 // https://www.eventbrite.co.uk/developer/v3/endpoints/events_series/#ebapi-post-series
 func (c *Client) EventSeriesCreate(ctx context.Context, req *SeriesCreateEventRequest) (interface{}, error) {
@@ -123,7 +124,7 @@ func (c *Client) EventSeriesCreate(ctx context.Context, req *SeriesCreateEventRe
 
 // EventSeriesGet returns a repeating event series parent object for the specified repeating event series
 //
-// Return object is not documented
+// # Return object is not documented
 //
 // https://www.eventbrite.co.uk/developer/v3/endpoints/events_series/#ebapi-get-series-id
 func (c *Client) EventSeriesGet(ctx context.Context, id string) (interface{}, error) {

@@ -2,6 +2,7 @@ package eventbrite
 
 import (
 	"fmt"
+
 	"golang.org/x/net/context"
 )
 
@@ -116,11 +117,11 @@ type GetUserEvents struct {
 // https://www.eventbrite.com/developer/v3/endpoints/users/#ebapi-id9
 type CreateOrganizationEventRequest struct {
 	// The name of the event. Value cannot be empty nor whitespace.
-	NameHtml string `json:"event.name.html" validate:"required"`
+	NameHTML string `json:"event.name.html" validate:"required"`
 	// The ID of the organizer of this event
-	DescriptionHtml string `json:"event.description.html" validate:"required"`
+	DescriptionHTML string `json:"event.description.html" validate:"required"`
 	// The ID of the organizer of this event
-	OrganizerId string `json:"event.organizer_id" validate:"required"`
+	OrganizerID string `json:"event.organizer_id" validate:"required"`
 	// The start time of the event
 	StartUtc string `json:"event.start.utc" validate:"required"`
 	// Yes    Start time timezone (Olson format)
@@ -137,19 +138,19 @@ type CreateOrganizationEventRequest struct {
 	EventCurrency string `json:"event.currency" validate:"required"`
 	// The ID of a previously-created venue to associate with this event. You can omit this field or
 	// set it to null if you set online_event.
-	VenueId string `json:"event.venue_id"`
+	VenueID string `json:"event.venue_id"`
 	// Is the event online-only (no venue)?
 	OnlineEvent bool `json:"event.online_event"`
 	// If the event is publicly listed and searchable. Defaults to True.
 	Listed bool `json:"event.listed"`
 	// The logo for the event
-	LogoId string `json:"event.logo_id"`
+	LogoID string `json:"event.logo_id"`
 	// The category (vertical) of the event
-	CategoryId string `json:"event.category_id"`
+	CategoryID string `json:"event.category_id"`
 	// The subcategory of the event (US only)
-	SubcategoryId string `json:"event.subcategory_id"`
+	SubcategoryID string `json:"event.subcategory_id"`
 	// The format (general type) of the event
-	FormatId string `json:"event.format_id"`
+	FormatID string `json:"event.format_id"`
 	// If users can share the event on social media
 	Sharable bool `json:"event.shareable"`
 	// Only invited users can see the event page
@@ -274,8 +275,7 @@ type UserOwnedEventResponse struct {
 	Events     []Event    `json:"events"`
 }
 
-type UserEventsRequest struct {
-}
+type UserEventsRequest struct{}
 
 type UserEventsResponse struct {
 	// Filter event results by name
@@ -458,7 +458,6 @@ func (c *Client) UserEventAttendees(ctx context.Context, id string, request *Use
 	r := new(UserEventAttendeesResponse)
 
 	return r, c.getJSON(ctx, fmt.Sprintf("/users/%s/owned_event_attendees/", id), request, r)
-
 }
 
 // UserEventOrders returns a paginated response of orders, under the key orders, of orders placed against any of
@@ -469,7 +468,6 @@ func (c *Client) UserEventOrders(ctx context.Context, id string, request *UserEv
 	r := new(UserEventOrdersResponse)
 
 	return r, c.getJSON(ctx, fmt.Sprintf("/users/%s/owned_event_orders/", id), request, r)
-
 }
 
 // UserContactLists returns a list of contact_list that the user owns as the key contact_lists

@@ -106,8 +106,8 @@ func (c *Client) VenueCreate(ctx context.Context, req *CreateVenueRequest) (*Ven
 // Creates a new venue with associated address
 //
 // https://www.eventbrite.com/developer/v3/endpoints/venues/#ebapi-post-venues
-func (c *Client) VenueEvents(ctx context.Context, venueId string) (*VenueEventsResult, error) {
+func (c *Client) VenueEvents(ctx context.Context, venueID string) (*VenueEventsResult, error) {
 	res := new(VenueEventsResult)
 
-	return res, c.postJSON(ctx, fmt.Sprintf("/venues/%s/events/", venueId), nil, res)
+	return res, c.postJSON(ctx, fmt.Sprintf("/venues/%s/events/", venueID), nil, res)
 }

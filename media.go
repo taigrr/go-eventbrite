@@ -2,6 +2,7 @@ package eventbrite
 
 import (
 	"fmt"
+
 	"golang.org/x/net/context"
 )
 
@@ -12,7 +13,7 @@ type Media struct {
 	// oauth token
 	Token string `json:"upload_token"`
 	// the URL that should be uploaded to
-	Url string `json:"url"`
+	URL string `json:"url"`
 	// the POST data that should be included in the POST that uploads the file
 	UploadData UploadData `json:"upload_data"`
 	// Specifies the POST field that the file itself should be included in (handled using HTTP multipart upload)
@@ -22,7 +23,7 @@ type Media struct {
 type UploadData struct {
 	AWSAccessKeyID string `json:"AWSAccessKeyId"`
 	Bucket         string `json:"bucket"`
-	Acl            string `json:"acl"`
+	ACL            string `json:"acl"`
 	Key            string `json:"kcl"`
 	Signature      string `json:"signature"`
 	Policy         string `json:"policy"`
@@ -70,5 +71,5 @@ func (c *Client) MediaGetUpload(ctx context.Context, id string) (*Image, error) 
 func (c *Client) MediaCreate(ctx context.Context, req *MediaCreateUpload) (*Image, error) {
 	i := new(Image)
 
-	return i, c.getJSON(ctx, fmt.Sprintf("/media/upload/"), req, i)
+	return i, c.getJSON(ctx, "/media/upload/", req, i)
 }
