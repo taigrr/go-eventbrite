@@ -1,4 +1,4 @@
-module github.com/kevinbcarpenter/go-eventbrite
+module github.com/taigrr/go-eventbrite
 
 go 1.22
 
